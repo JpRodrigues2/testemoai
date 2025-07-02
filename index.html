@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Teste API Circle.so</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 2rem;
+    }
+    input, button {
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      width: 100%;
+      max-width: 500px;
+    }
+    #output {
+      margin-top: 1rem;
+      background: #fff;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Teste de Integração com a API Circle.so</h1>
+
+  <label for="communityId">ID da Comunidade:</label>
+  <input type="text" id="communityId" placeholder="Ex: 123456" value="33124" />
+
+  <button onclick="listarMembros()">Listar Membros</button>
+
+  <div id="output"></div>
+
+  <script>
+    const token = 'Bearer nJ1Lyy8bEpdp4NuzzvR3h68FaxFePxTa';
+
+    async function listarMembros() {
+      const communityId = document.getElementById('communityId').value.trim();
+      const output = document.getElementById('output');
+      output.textContent = 'Carregando...';
+
+      if (!communityId) {
+        output.textContent = 'Por favor, insira o ID da comunidade.';
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://app.circle.so/api/v1/posts?community_id=33124&space_id=35421&topics[]=96`, { 
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Erro ao buscar membros');
+        }
+
+        output.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        output.textContent = 'Erro: ' + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
