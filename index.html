@@ -48,7 +48,7 @@
       }
 
       try {
-        const response = await fetch(`https://app.circle.so/api/v1/posts?community_id=33124&space_id=35421&topics[]=96`, { 
+        const response = await fetch(`https://app.circle.so/api/admin/v2/community_members`, { 
           headers: {
             'Authorization': token,
             'Content-Type': 'application/json'
