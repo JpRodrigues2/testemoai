@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Circle API Proxy Test</title>
+</head>
+<body>
+  <h1>Testar API do Circle via Netlify Proxy</h1>
+
+  <button onclick="chamar('/api/v1/events')">🔸 Eventos</button>
+  <button onclick="chamar('/api/v1/community_members?sort=latest')">🔸 Membros</button>
+  <button onclick="chamar('/api/v1/comments?community_id=33124')">🔸 Comentários</button>
+  <button onclick="chamar('/api/v1/posts?community_id=33124')">🔸 Posts</button>
+  
+  <pre id="saida">Clique em um botão acima para fazer a requisição</pre>
+
+  <script>
+    function chamar(endpoint) {
+      document.getElementById("saida").textContent = "🔄 Carregando...";
+
+      fetch(endpoint)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("saida").textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(err => {
+          document.getElementById("saida").textContent = "Erro: " + err.message;
+        });
+    }
+  </script>
+</body>
+</html>

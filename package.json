@@ -1,0 +1,10 @@
+{
+  "name": "circle-netlify-proxy",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}
